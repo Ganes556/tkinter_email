@@ -9,6 +9,7 @@ from tkinter import filedialog
 from email.message import EmailMessage
 from tkinter import messagebox
 from tkinter import ttk
+
 class Command(Widget):
     
     def Open(self):
@@ -52,7 +53,7 @@ class Command(Widget):
         pop_up.title("File list")
         pop_up.geometry("300x220")
         pop_up.configure(bg="red")
-        pop_up.iconbitmap(r'C:\Users\62831\Documents\GitHub\GUI EMAIL\png_icon\list.ico')
+        pop_up.iconbitmap(r"{}/list.ico".format(os.getcwd()))
         my_frame = Frame(pop_up)
         y_scrollbar = Scrollbar(my_frame,orient=VERTICAL)
         lists_file = Listbox(my_frame,height="10",width="50",yscrollcommand=y_scrollbar.set,selectmode=EXTENDED,font=("arial",10,"bold"))
@@ -137,7 +138,9 @@ class Command(Widget):
             except Exception:
                 messagebox.showerror("Error","Check akun/connection !")
                 terkirim = False
+                  
         if terkirim:
+            root.update()      
             messagebox.showinfo("Sukses","Terkirim !")
 
     def msg_program(self):
@@ -237,14 +240,14 @@ class Widged(Command):
         ## button syntax
         
         self.button_show = tk.Button(root,text="Show",command=self.show, width=4,bg="deepskyblue",activebackground="skyblue") # belum lese
-        button_open = tk.Button(root,image=photo_open,command=self.Open,bd=0,bg="red",activebackground="skyblue",relief="raised") # belum
+        # button_open = tk.Button(root,image=photo_open,command=self.Open,bd=0,bg="red",activebackground="skyblue",relief="raised") # belum
         button_kirim = tk.Button(root,text="Send",command=self.kirim,bg="deepskyblue",activebackground="skyblue")
         button_file_show = tk.Button(root,text="Show",command=self.file_show, width=4,bg="deepskyblue",activebackground="skyblue")
         button_open_penerima = tk.Button(root,image=photo_penerima,command=self.open_penerima,bd=0,bg="red",activebackground="skyblue")
 
         ## posisi button 
         self.button_show.place(x=305,y=49)
-        button_open.place(x=305,y=170)
+        # button_open.place(x=305,y=170)
         button_kirim.place(x=180,y=400)
         button_file_show.place(x=330,y=169)
         button_open_penerima.place(x=305,y=130)
@@ -259,16 +262,17 @@ class Running_program(Widged,Command):
         Widged.label(self)
         Widged.entry(self)
         Widged.button(self)
-    
+     
 
 if __name__ == '__main__':
     root = tk.Tk()
     root.geometry("380x450")
     root.title("EMAIL APP")
-    root.iconbitmap(r'C:\Users\62831\Documents\GitHub\GUI EMAIL\png_icon\email_ico.ico')
+    root.iconbitmap(r"{}/email_ico.ico".format(os.getcwd()))
     root.resizable(False,False)
     root.configure(background="red")
-    photo_open = PhotoImage(file=r"C:\Users\62831\Documents\GitHub\GUI EMAIL\png_icon\open.png")
-    photo_penerima = PhotoImage(file=r"C:\Users\62831\Documents\GitHub\GUI EMAIL\png_icon\penerima.png")
+    photo_open = PhotoImage(file=r"{}/open.png".format(os.getcwd()))
+    photo_penerima = PhotoImage(file=r"{}/penerima.png".format(os.getcwd()))
     Running_program()
     root.mainloop()
+
